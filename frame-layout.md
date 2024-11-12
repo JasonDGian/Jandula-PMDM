@@ -26,9 +26,8 @@ Esta vista organiza sus elementos con el atributo `android:layout_gravity=""`, a
 **Los valores de posicionamiento son los siguientes:**    
    
  <p align="center">
-   <img src="https://github.com/user-attachments/assets/c6eea6b9-cc3f-4496-b5bb-ab347bb34354">
+   <img src="https://github.com/user-attachments/assets/ad632886-45f5-4243-bfa8-43848ccc5963">
  </p>
- 
 
 
 **Código del ejemplo:**
