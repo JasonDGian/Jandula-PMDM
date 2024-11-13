@@ -1,10 +1,10 @@
 # 📌 Almacenar archivos en la memoria internad del dispositivo.
 
+**OutputStreamWriter:**     
+Es una clase en Kotlin (y en Java) que se utiliza para escribir caracteres en un flujo de salida (output stream) y es especialmente útil para escribir datos en archivos. Funciona como un "adaptador" entre el flujo de salida de bytes (binario) y el flujo de caracteres (texto), convirtiendo datos de caracteres en bytes utilizando una codificación especificada (por defecto UTF-8).
 
-
-**OutputStreamWriter:** es una clase en Kotlin (y en Java) que se utiliza para escribir caracteres en un flujo de salida (output stream) y es especialmente útil para escribir datos en archivos. Funciona como un "adaptador" entre el flujo de salida de bytes (binario) y el flujo de caracteres (texto), convirtiendo datos de caracteres en bytes utilizando una codificación especificada (por defecto UTF-8).
-
-**openFileOutput** es un método en Android que permite abrir o crear un archivo en el almacenamiento interno de la aplicación y obtener un flujo de salida (FileOutputStream) para escribir en él. Este método es específico de Android y se utiliza para manejar archivos en el almacenamiento privado de la aplicación, al cual solo esta tiene acceso. Esto garantiza que los datos estén seguros y que otras aplicaciones no puedan leerlos ni modificarlos.
+**openFileOutput:**    
+Es un método en Android que permite abrir o crear un archivo en el almacenamiento interno de la aplicación y obtener un flujo de salida (FileOutputStream) para escribir en él. Este método es específico de Android y se utiliza para manejar archivos en el almacenamiento privado de la aplicación, al cual solo esta tiene acceso. Esto garantiza que los datos estén seguros y que otras aplicaciones no puedan leerlos ni modificarlos.
 
 
 **Funcion que guarda el fichero en el almacenamiento interno:**
@@ -25,9 +25,6 @@ fun guardar(nombreFichero: String) {
 
     // Cierra el archivo para liberar recursos.
     archivo.close()
-
-    // Finaliza la actividad actual, cerrando la aplicación o volviendo a la actividad anterior.
-    finish()
 }
 ```
 
