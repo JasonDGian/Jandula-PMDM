@@ -30,26 +30,33 @@ fun guardar(nombreFichero: String) {
 
 **Funcion que recupera el fichero:**
 ```kotlin
-    //Leo el fichero y lo devuelvo en una variable
-    fun contenidoFichero (nombreFichero : String) : String{
+// Función que lee el contenido de un archivo y lo devuelve como una cadena de texto.
+fun contenidoFichero(nombreFichero: String): String {
 
-        // Variable que almacenará el contenido del fichero.
-        var contenido = "";
+    // Inicializa una variable vacía para almacenar el contenido completo del archivo.
+    var contenido = ""
 
-        // Variable 'archivo' donde se guarda el fichero como objeto.  
-        val archivo = InputStreamReader( openFileInput( nombreFichero ) )
+    // Abre el archivo en modo de lectura usando InputStreamReader.
+    // `openFileInput` devuelve un flujo de entrada para el archivo especificado.
+    val archivo = InputStreamReader(openFileInput(nombreFichero))
 
-        // Variable Buffer Reader que lee el fichero.
-        val bufferReader = BufferedReader (archivo)
+    // Crea un `BufferedReader` que mejora la eficiencia de lectura del archivo al leerlo por bloques.
+    val bufferReader = BufferedReader(archivo)
 
-        // Linea leida en el fichero
-        var linea = bufferReader.readLine()
+    // Lee la primera línea del archivo y la almacena en la variable `linea`.
+    var linea = bufferReader.readLine()
 
-        // Mientras que linea no sea nulo, almacenar en variable de contenido.
-        while (linea != null)  {
-            contenido = contenido + linea+"\n"
-            linea = bufferReader.readLine()
-        }
-        return contenido
+    // Bucle que continúa leyendo hasta que no haya más líneas (es decir, hasta que `linea` sea nula).
+    while (linea != null) {
+        // Añade la línea leída al contenido, junto con un salto de línea al final.
+        contenido += linea + "\n"
+        
+        // Lee la siguiente línea y actualiza `linea`.
+        linea = bufferReader.readLine()
     }
+
+    // Retorna el contenido completo del archivo como una cadena.
+    return contenido
+}
+
 ```
