@@ -43,12 +43,12 @@ fun guardar(nombreFichero: String) {
         val bufferReader = BufferedReader (archivo)
 
         // Linea leida en el fichero
-        var linea = bf.readLine()
+        var linea = bufferReader.readLine()
 
         // Mientras que linea no sea nulo, almacenar en variable de contenido.
         while (linea != null)  {
             contenido = contenido + linea+"\n"
-            linea = bf.readLine()
+            linea = bufferReader.readLine()
         }
         return contenido
     }
