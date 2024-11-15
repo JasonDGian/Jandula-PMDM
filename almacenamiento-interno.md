@@ -1,4 +1,4 @@
-# 📌 Almacenar archivos en la memoria internad del dispositivo.
+# 📌 Almacenar archivos en la memoria interna del dispositivo.
 Procedimiento para guardar y cargar datos de un fichero interno.
 1. Crear el layout con los elementos que consumiran e interactuarán con el fichero.
 2. Asociar esos elementos a unas variables en la clase Kotlin.
