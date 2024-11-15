@@ -1,8 +1,9 @@
 # 📌 Almacenar archivos en la memoria interna del dispositivo.
 Procedimiento para guardar y cargar datos de un fichero interno.
-1. Crear el layout con los elementos que consumiran e interactuarán con el fichero.
-2. Asociar esos elementos a unas variables en la clase Kotlin.
-3. Llamar a las funciones de carga y guardado de datos donde sea pertinente.
+1. Crear el layout con los elementos (botones, formularios...) que consumiran e interactuarán con el fichero.
+2. Asociar (findViewById) esos elementos a unas variables en la clase Kotlin.
+3. Definir las funciones de carga y guardado de datos en el fichero deseado.
+4. Llamar a las funciones de carga y guardado de datos donde sea pertinente.
 
 **OutputStreamWriter:**     
 Es una clase en Kotlin (y en Java) que se utiliza para escribir caracteres en un flujo de salida (output stream) y es especialmente útil para escribir datos en archivos. Funciona como un "adaptador" entre el flujo de salida de bytes (binario) y el flujo de caracteres (texto), convirtiendo datos de caracteres en bytes utilizando una codificación especificada (por defecto UTF-8).
