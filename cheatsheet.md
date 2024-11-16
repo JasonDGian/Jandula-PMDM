@@ -46,7 +46,7 @@ val nombre: String = intent.extras?.getString("EXTRA_DATO").orEmpty()
             startActivity(intent)
 ```
 
-# 📌 Funciones
+# 📌 Funciones con retorno
 ```kotlin
 // El retorno se pone despues de los parametros de entrada.
 fun validaRespuesta(respuesta: Int): Boolean {  
