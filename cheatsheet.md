@@ -22,7 +22,43 @@ val mensaje: String = "Juan tiene $edad años!"
 val esVerdadero: Boolean = true
 val esFalso: Boolean = false
 ```
+# 📌 Colecciones
+```kotlin
+// Lista NO mutable
+val listaInmutable: List<String> = listOf("Manzana", "Banana", "Cereza")
+println(listaInmutable)  // Output: [Manzana, Banana, Cereza]
 
+// Lista mutable
+val listaMutable: MutableList<String> = mutableListOf("Manzana", "Banana", "Cereza")
+listaMutable.add("Durazno")  // Se puede agregar un elemento
+println(listaMutable)  // Output: [Manzana, Banana, Cereza, Durazno]
+
+// Conjnuto NO mutable
+val conjuntoInmutable: Set<Int> = setOf(1, 2, 3, 3)  // El 3 duplicado será ignorado
+println(conjuntoInmutable)  // Output: [1, 2, 3]
+
+// Conjunto mutable
+val conjuntoMutable: MutableSet<Int> = mutableSetOf(1, 2, 3)
+conjuntoMutable.add(4)  // Se puede agregar un elemento
+println(conjuntoMutable)  // Output: [1, 2, 3, 4]
+
+// Mapa NO mutable.
+val mapaInmutable: Map<String, Int> = mapOf("uno" to 1, "dos" to 2, "tres" to 3)
+println(mapaInmutable)  // Output: {uno=1, dos=2, tres=3}
+
+// Mapa mutable
+val mapaMutable: MutableMap<String, Int> = mutableMapOf("uno" to 1, "dos" to 2)
+mapaMutable["tres"] = 3  // Se puede agregar o modificar un par clave-valor
+println(mapaMutable)  // Output: {uno=1, dos=2, tres=3}
+
+// Arreglos o Array
+val arreglo: Array<Int> = arrayOf(1, 2, 3, 4)
+println(arreglo.joinToString())  // Output: 1, 2, 3, 4
+
+arreglo[0] = 10  // Cambiar el valor en el índice 0
+println(arreglo.joinToString())  // Output: 10, 2, 3, 4
+```
+   
 # 📌 Navegación.
 Al intento deberemos especificar contexto y contenido. El contexto es la clase desde la cual invocamos la nueva actividad, y el contenido es la actividad misma que estamos invocando.
 ```kotlin
