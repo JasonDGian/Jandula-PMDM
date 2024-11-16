@@ -1,3 +1,28 @@
+# 📌 Tipos de datos.
+```kotlin
+// Enteros
+val byteValue: Byte = 10
+val shortValue: Short = 1000
+val intValue: Int = 100000
+val longValue: Long = 10000000000L
+
+// Decimales
+val floatValue: Float = 10.5f
+val doubleValue: Double = 20.99
+
+// Cadenas y chars
+val letra: Char = 'A'
+val saludo: String = "Hola, Kotlin"
+
+// Interpolacion
+val edad: Int = 20
+val mensaje: String = "Juan tiene $edad años!"
+
+// Buleanos.
+val esVerdadero: Boolean = true
+val esFalso: Boolean = false
+```
+
 # 📌 Navegación.
 Al intento deberemos especificar contexto y contenido. El contexto es la clase desde la cual invocamos la nueva actividad, y el contenido es la actividad misma que estamos invocando.
 ```kotlin
@@ -48,9 +73,10 @@ val nombre: String = intent.extras?.getString("EXTRA_DATO").orEmpty()
 
 # 📌 Funciones con retorno
 ```kotlin
-// El retorno se pone despues de los parametros de entrada.
-fun validaRespuesta(respuesta: Int): Boolean {  
-return (respuesta == this.correcta)
+// Tras los parentesis de los parametros y sus tipos irá el tipo de dato retornado por la funcion.
+fun nombreFuncion(parametro1: Tipo, parametro2: Tipo): TipoDeRetorno {
+    // Cuerpo de la función
+    return valorDeRetorno
 }
 ```
 
