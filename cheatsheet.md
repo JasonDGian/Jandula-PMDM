@@ -246,5 +246,25 @@ fun existeArchivo(archivo: String): Boolean {
         return contenido
     }
 ```
-# 📌 
+# 📌 Radio Button \ Radio Group
+En los layout.xml es necesario envolver los `radio-button` en un `radio-group`.
+
+**Referencia y llamadas a los botones desde kotlin**
+```kotlin
+    radioGroup.setOnCheckedChangeListener {
+      _, checkedId ->
+        if ( respCorrecta1.isChecked ){
+            Toast.makeText(this, "Respuesta correcta 1", Toast.LENGTH_SHORT).show()
+        }
+        if ( respCorrecta2.isChecked ){
+            Toast.makeText(this, "Respuesta correcta 2", Toast.LENGTH_SHORT).show()
+        }
+        if ( respCorrecta3.isChecked ){
+            Toast.makeText(this, "Respuesta correcta 3", Toast.LENGTH_SHORT).show()
+        }
+        if ( respCorrecta4.isChecked ){
+        Toast.makeText(this, "Respuesta correcta 4", Toast.LENGTH_SHORT).show()
+        }
+    }
+```
 # 📌 
