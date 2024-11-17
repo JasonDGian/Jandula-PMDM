@@ -51,16 +51,55 @@ data class Pregunta(
 
 **Ejemplo DAO**
 ```kotlin
+package com.dasus.jasootapp.dao
+
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Query
+import androidx.room.Upsert
+import com.dasus.jasootapp.models.Pregunta
+import kotlinx.coroutines.flow.Flow
+
 @Dao
 interface PreguntaDao {
 
-  @Upsert
-  suspend fun upsertPregunta( pregunta: Pregunta )
+    @Upsert
+    suspend fun guardarPregunta(pregunta: Pregunta)
 
-  @Delete
-  suspend fun deletePregunta( pregunta: Pregunta )
+    @Delete
+    suspend fun borrarPregunta(pregunta: Pregunta)
 
+    @Query(" SELECT * FROM pregunta ORDER BY id ")
+    fun obtenerPreguntas(): Flow<List<Pregunta>>
 }
 ```
+
 **NOTA:** Las operaciones que no recuperan datos en vivo deben precisar la palabra clave `suspend` para aprovechar las corutinas de kotlin. 
+
+## 📍 Crear especificacion de BBDD.
+- En el paquete raiz creamos nueva clase abstracta que extienda de RoomDatabase().
+- Anotamos la clase con la anotacion `@Database()`.
+- Dentro de la anotación añadimos la propiedad `entities` que será una lista de las entidades que la bbdd debe manejar.
+- Especificamos la versión que por ahora siempre será `version = 1`
+- Dentro de esta clase creamos una constante que haga referencia a los repositorios que la base de datos debe conocer.
+
+**Ejemplo**
+```kotlin
+package com.dasus.jasootapp
+
+import androidx.room.Database
+import androidx.room.RoomDatabase
+import com.dasus.jasootapp.dao.PreguntaDao
+import com.dasus.jasootapp.models.Pregunta
+
+@Database(
+    entities = [Pregunta::class], // Entidad pregunta.
+    version = 1
+)
+abstract class JesootDatabase: RoomDatabase() {
+    // Repositorio DAO de pregunta.
+    abstract val dao: PreguntaDao
+}
+```
+
 
