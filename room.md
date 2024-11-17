@@ -89,11 +89,13 @@ interface PreguntaDao {
 - Especificamos la versión que por ahora siempre será `version = 1`
 - Dentro de esta clase creamos una constante que haga referencia a los repositorios que la base de datos debe conocer.
 
-**Ejemplo**
+**Ejemplo de especificacion con patron SINGLETON**
 ```kotlin
-package com.dasus.jasootapp
+package com.dasus.jasootapp.database
 
+import android.content.Context
 import androidx.room.Database
+import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.dasus.jasootapp.dao.PreguntaDao
 import com.dasus.jasootapp.models.Pregunta
@@ -102,7 +104,66 @@ import com.dasus.jasootapp.models.Pregunta
 abstract class JesootDatabase: RoomDatabase() {
     // Repositorio DAO de pregunta.
     abstract fun preguntaDao(): PreguntaDao
+
+    // Companion object para patron SINGLETON
+    companion object {
+        @Volatile
+        private var INSTANCE: JesootDatabase? = null
+
+        fun getDatabase(context: Context): JesootDatabase {
+            return INSTANCE ?: synchronized(this) {
+                val instance = Room.databaseBuilder(
+                    context.applicationContext,
+                    JesootDatabase::class.java,
+                    "jesoot_database"
+                ).build()
+                INSTANCE = instance
+                instance
+            }
+        }
+    }
 }
 ```
 
+# 📌 Instanciar la base de datos.
+1. Crear una instancia Singleton usando un companion object.
+2. Inicializar la BBDD en la clase Application.
+3. Acceder al DAO desde las actividades usando el contexto de application.
+
+  
+1. Crear clase de aplicacion personalizada.
+```kotlin
+class MyApplication : Application() {
+    val database: AppDatabase by lazy {
+        AppDatabase.getDatabase(this)
+    }
+}
+```
+2. Manifestamos la clase `manifest.xml`.
+```xml
+<application
+    android:name=".MyApplication"
+    ... >
+</application>
+```
+3. Realizamos las llamadas.
+```
+class MainActivity : AppCompatActivity() {
+    private val preguntaDao by lazy {
+        (application as MyApplication).database.preguntaDao()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        // Use the DAO
+        lifecycleScope.launch {
+            val preguntas = preguntaDao.getPreguntas().collect { list ->
+                println("Preguntas: $list")
+            }
+        }
+    }
+}
+```
 
