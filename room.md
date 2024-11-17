@@ -134,19 +134,30 @@ abstract class JesootDatabase: RoomDatabase() {
      
 1. Crear clase de aplicacion personalizada.
 ```kotlin
-class MyApplication : Application() {
-    val database: AppDatabase by lazy {
-        AppDatabase.getDatabase(this)
+package com.dasus.jasootapp
+
+import android.app.Application
+import com.dasus.jasootapp.database.JesootDatabase
+
+// Clase intermedia que instancia la base de datos.
+class myApp: Application() {
+    
+    // Devuelve la base de datos.
+    val database: JesootDatabase by lazy {
+        JesootDatabase.getDatabase(this)
     }
 }
 ```
 2. Manifestamos la clase `manifest.xml`.
+Este paso lo que hace es indicar en el manifes, el nombre que clase deseamos inicializar para las configuraciones globales.
 ```xml
 <application
     android:name=".MyApplication"
     ... >
 </application>
 ```
+![imagen](https://github.com/user-attachments/assets/694f3cfe-4b51-42d2-934a-68a6e5c56623)
+
 3. Realizamos las llamadas.
 ```
 class MainActivity : AppCompatActivity() {
