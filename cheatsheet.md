@@ -168,3 +168,42 @@ data class Pregunta(
 # 📌 Imagenes
 
 # 📌 Fragmentos
+
+# 📌 Almacenamiento interno.
+**Funcion de control de existencia**
+```kotlin
+// Función que busca comprobar si un fichero de cierto nombre ya existe en la memoria.
+fun existeArchivo(archivo: String): Boolean {
+    // Analiza el array de ficheros de la aplicación y busca coincidencia.
+    return fileList().any { it == archivo }
+}
+```
+
+**Funcion de guardado**
+```kotlin
+    // Función que guarda el contenido de un campo de texto en un archivo.
+    fun guardarEnFichero(nombreFichero: String, contenido: String) {
+        val archivo = OutputStreamWriter(openFileOutput(nombreFichero, Activity.MODE_PRIVATE))
+        archivo.write(contenido)
+        archivo.flush()
+        archivo.close()
+    }
+```
+
+**Funcion de lectura**
+```kotlin
+  fun leerDeFichero(nombreFichero: String): String {
+        var contenidoFichero = "";
+        val archivo = InputStreamReader(openFileInput(nombreFichero))
+        val bufferReader = BufferedReader(archivo)
+        var linea = bufferReader.readLine()
+
+        while (linea != null) {
+            contenidoFichero = contenido + linea + "\n"
+            linea = bufferReader.readLine()
+        }
+        return contenido
+    }
+```
+# 📌 
+# 📌 
