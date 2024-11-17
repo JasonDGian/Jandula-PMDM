@@ -129,8 +129,9 @@ abstract class JesootDatabase: RoomDatabase() {
 1. Crear una instancia Singleton usando un companion object.
 2. Inicializar la BBDD en la clase Application.
 3. Acceder al DAO desde las actividades usando el contexto de application.
-
-  
+   
+--- 
+     
 1. Crear clase de aplicacion personalizada.
 ```kotlin
 class MyApplication : Application() {
