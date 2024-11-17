@@ -42,3 +42,25 @@ data class Pregunta(
     }
 }
 ```
+
+## 📍 Crear la DAO - interfaz repositorio.
+- Creamos una interfaz con el mismo nombre que la dataclass acabado en DAO -> `PreguntaDAO`
+- Anotamos la interfaz con anotacion `@Dao`
+- En el cuerpo de esta interfaz definimos los metodos de intearccion con las tablas.
+  - Metodos CRUD.
+
+**Ejemplo DAO**
+```kotlin
+@Dao
+interface PreguntaDao {
+
+  @Upsert
+  suspend fun upsertPregunta( pregunta: Pregunta )
+
+  @Delete
+  suspend fun deletePregunta( pregunta: Pregunta )
+
+}
+```
+**NOTA:** Las operaciones que no recuperan datos en vivo deben precisar la palabra clave `suspend` para aprovechar las corutinas de kotlin. 
+
