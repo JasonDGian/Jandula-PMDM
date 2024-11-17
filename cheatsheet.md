@@ -58,6 +58,35 @@ println(arreglo.joinToString())  // Output: 1, 2, 3, 4
 arreglo[0] = 10  // Cambiar el valor en el índice 0
 println(arreglo.joinToString())  // Output: 10, 2, 3, 4
 ```
+
+# 📌 Crear bundles.
+```kotlin
+// empaqueta varias claves-valor.
+val miPaquete = Bundle().apply {
+    putString("EXTRA_NOMBRE", et_nombre.text.toString())
+    putString("EXTRA_APELLIDO", et_apellido.text.toString())
+    putString("EXTRA_DIRECCION", et_direccion.text.toString())
+    putString("EXTRA_CODIGO-POSTAL", et_codigoPostal.text.toString())
+}
+
+// Leer valores empaquetados.
+val nombre = miPaquete.getString("EXTRA_NOMBRE")
+
+// Obtener el bundle de un intent, teniendo en cuenta que puede ser nulo y
+// extraer un valor teniendo en cuenta que este tambien puede ser nulo.
+val miPaquete = intent.extras
+val nombre = miPaquete?.getString("EXTRA_NOMBRE") ?: "Nombre no especificado"
+```
+
+
+# 📌 Companion Object
+```kotlin
+// Objecto compañero parecido a valores estaticos de otros lenguajes.
+    // El concepto es que pertenece a la clase y no al instancia.
+    companion object{
+        const val TAG = "MainActivity"
+    }
+```
    
 # 📌 Navegación.
 Al intento deberemos especificar contexto y contenido. El contexto es la clase desde la cual invocamos la nueva actividad, y el contenido es la actividad misma que estamos invocando.
@@ -90,21 +119,21 @@ val nombre: String = intent.extras?.getString("EXTRA_DATO").orEmpty()
 
 **Pasar bundle datos**
 ```kotlin
-            // declara inicializa la variable intent con la actividad..
-            val intent = Intent(this, RegistroActivity::class.java)
+// declara inicializa la variable intent con la actividad..
+val intent = Intent(this, RegistroActivity::class.java)
 
-            // empaqueta varias claves-valor.
-            val bundle = Bundle().apply {
-                putString("EXTRA_NOMBRE", et_nombre.text.toString())
-                putString("EXTRA_APELLIDO", et_apellido.text.toString())
-                putString("EXTRA_DIRECCION", et_direccion.text.toString())
-                putString("EXTRA_CODIGO-POSTAL", et_codigoPostal.text.toString())
-            }
-            // envia el paquete al intent.
-            intent.putExtras(bundle)
+// empaqueta varias claves-valor.
+val bundle = Bundle().apply {
+    putString("EXTRA_NOMBRE", et_nombre.text.toString())
+    putString("EXTRA_APELLIDO", et_apellido.text.toString())
+    putString("EXTRA_DIRECCION", et_direccion.text.toString())
+    putString("EXTRA_CODIGO-POSTAL", et_codigoPostal.text.toString())
+}
+// envia el paquete al intent.
+intent.putExtras(bundle)
 
-            // Llama la activity.
-            startActivity(intent)
+// Llama la activity.
+startActivity(intent)
 ```
 
 # 📌 Funciones con retorno
