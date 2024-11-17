@@ -22,7 +22,7 @@ val mensaje: String = "Juan tiene $edad años!"
 val esVerdadero: Boolean = true
 val esFalso: Boolean = false
 ```
-# 📌 Colecciones
+# 📌 Colecciones.
 ```kotlin
 // Lista NO mutable
 val listaInmutable: List<String> = listOf("Manzana", "Banana", "Cereza")
@@ -79,7 +79,7 @@ val nombre = miPaquete?.getString("EXTRA_NOMBRE") ?: "Nombre no especificado"
 ```
 
 
-# 📌 Companion Object
+# 📌 Companion Object.
 ```kotlin
 // Objecto compañero parecido a valores estaticos de otros lenguajes.
     // El concepto es que pertenece a la clase y no al instancia.
@@ -136,7 +136,7 @@ intent.putExtras(bundle)
 startActivity(intent)
 ```
 
-# 📌 Funciones con retorno
+# 📌 Funciones con retorno.
 ```kotlin
 // Tras los parentesis de los parametros y sus tipos irá el tipo de dato retornado por la funcion.
 fun nombreFuncion(parametro1: Tipo, parametro2: Tipo): TipoDeRetorno {
@@ -163,11 +163,39 @@ data class Pregunta(
 }
 ```
 
-# 📌 Draweables
+# 📌 Draweables.
 
-# 📌 Imagenes
+# 📌 Imagenes.
 
-# 📌 Fragmentos
+# 📌 Fragmentos.
+1. **Crear fragmento nuevo:** `New` > `Fragment` > `Fragment(Blank)` > Nombrar el fragmento `NombreFragment`
+2. **Borrar comentarios genéricos.**
+3. **Definir el layout y elementos del fragmento** (diseño).
+4. **Posicionar el fragmento en la actividad principal** (FragmentContainerView + ID fragmento).
+```kotlin
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerButton"
+        android:name="ies.jandula.ejercicioframgentosi.ButtonFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</LinearLayout>
+```
+
+
 
 # 📌 Almacenamiento interno.
 **Funcion de control de existencia**
