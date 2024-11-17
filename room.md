@@ -159,7 +159,7 @@ Este paso lo que hace es indicar en el manifes, el nombre que clase deseamos ini
 ![imagen](https://github.com/user-attachments/assets/694f3cfe-4b51-42d2-934a-68a6e5c56623)
 
 3. Realizamos las llamadas.
-```
+```kotlin
 class MainActivity : AppCompatActivity() {
     private val preguntaDao by lazy {
         (application as MyApplication).database.preguntaDao()
