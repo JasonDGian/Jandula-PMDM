@@ -163,9 +163,22 @@ data class Pregunta(
 }
 ```
 
-# 📌 Draweables.
+# 📌 Drawables.
+**Crear nuevo Drawable:** `Clic derecho en drawable` > `New` > `Drawable resource file`    
+**Ejemplo Drawable**    
+```kotlin
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/white"/>
+    <stroke
+        android:width="1dp"
+        android:color="#000000"/>
+    <corners android:radius="12dp"/>
+</shape>
+```
 
 # 📌 Imagenes.
+
 
 # 📌 Fragmentos.
 1. **Crear fragmento nuevo:** `New` > `Fragment` > `Fragment(Blank)` > Nombrar el fragmento `NombreFragment`
