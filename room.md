@@ -1,3 +1,9 @@
+1. Añadir las dependencias.
+  - Añadir las librerias
+  - Añadir los plugins. 
+2. Crear modelos - @Entity
+3. Crear repositorios - @Dao
+
 
 1. Crear un esquema que contiene las tablas.
 2. Crear objeto que contiene la informacion, donde cada atributo del objeto representa un campo de la tabla.
@@ -92,13 +98,10 @@ import androidx.room.RoomDatabase
 import com.dasus.jasootapp.dao.PreguntaDao
 import com.dasus.jasootapp.models.Pregunta
 
-@Database(
-    entities = [Pregunta::class], // Entidad pregunta.
-    version = 1
-)
+@Database(entities = [Pregunta::class], version = 1)
 abstract class JesootDatabase: RoomDatabase() {
     // Repositorio DAO de pregunta.
-    abstract val dao: PreguntaDao
+    abstract fun preguntaDao(): PreguntaDao
 }
 ```
 
