@@ -1,3 +1,6 @@
+Documentacion room.
+https://developer.android.com/training/data-storage/room?hl=es-419
+
 1. Añadir las dependencias.
   - Añadir las librerias
   - Añadir los plugins. 
