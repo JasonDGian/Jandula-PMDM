@@ -182,3 +182,33 @@ class MainActivity : AppCompatActivity() {
 }
 ```
 
+4.  Ejemplo de recuperacion de datos en vivo (LIVE DATA)
+**Declaración de funccion en DAO**
+```kotlin
+// Funcion que mediante una consulta SQL devuelve, demanera
+// observada, una lista de preguntas.
+@Query("SELECT * FROM pregunta")
+fun loadAllPreguntasLive(): LiveData<List<Pregunta>>
+```
+
+
+**Llamada y observacion de datos.**
+```kotlin
+  // Este bloque de codigo "OBSERVA" una variable cuyo valor
+  // depende de una llamada a la base de gatos. Al actualizarse
+  // la base de datos se actualiza a su vez el codigo que depende de ella.
+  database.preguntaDao().loadAllPreguntasLive().observe(this)
+  {
+      listado ->
+      botonJugar.setOnClickListener {
+          if (listado.size > 7){
+              irAJugar()
+          }
+          else {
+              // Muestra el error de acceso a juego.
+              muestraError()
+              muestraMensaje("¡Necesitas preguntas!")
+          }
+      }
+  }
+```
