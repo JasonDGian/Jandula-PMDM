@@ -183,6 +183,7 @@ class MainActivity : AppCompatActivity() {
 ```
 
 4.  Ejemplo de recuperacion de datos en vivo (LIVE DATA).   
+
 **Declaración de funccion en DAO**
 ```kotlin
 // Funcion que mediante una consulta SQL devuelve, demanera
