@@ -267,6 +267,13 @@ En los layout.xml es necesario envolver los `radio-button` en un `radio-group`.
         }
     }
 ```
+**Funcion de reinicio de seleccion**
+```kotlin
+// Set the reset button to clear the RadioGroup selection
+resetButton.setOnClickListener {
+    radioGroup.clearCheck()
+}
+```
 
 # 📌 Menu contextual inflado.
 **Crea un fichero en /res/menu que contenga las entradas.**
