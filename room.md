@@ -246,3 +246,61 @@ botonJugar.setOnClickListener {
 }
 
 ```
+
+# 📌 Menu contextual inflado.
+**Crea un fichero en /res/menu que contenga las entradas.**
+```xml
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+        <item
+            android:id="@+id/botonFormulario"
+            android:title="@string/boton_contextual_configuracion" />
+        <item
+            android:id="@+id/botonListado"
+            android:title="@string/boton_contextual_listad" />
+        <item
+            android:id="@+id/botonInfo"
+            android:title="@string/contextual_acerca_de"/>
+</menu>
+```
+**Identifica el boton**
+```kotlin
+        // Identifica el boton para el menu contextual.
+        val botonContextual = findViewById<Button>(R.id.boton_menu)
+```
+
+**Infla el menu que aparece**
+```kotlin
+        // configura el comportamiento del boton del menu contextual.
+        botonContextual.setOnClickListener {
+                view -> // vista que recibe.
+            // Identifica o genera el menu emergente.
+            val menuEmergente = PopupMenu(this, view)
+            // Busca la vista del menu contextual y lo mete en el menu emergente creado.
+            menuEmergente.menuInflater.inflate(R.menu.menu_cascada, menuEmergente.menu)
+            // Aplica un comportamiento a las entradas del menu inflado.
+            menuEmergente.setOnMenuItemClickListener { menuItem: MenuItem ->
+                when (menuItem.itemId) {
+                    R.id.botonFormulario -> {
+                        // Abre actividad Configuracion.
+                        ifAConfiguracion()
+                        true
+                    }
+                    R.id.botonListado -> {
+                        // Abre actividad Listado Preguntas.
+                        irAListado()
+                        true
+                    }
+                    R.id.botonInfo ->{
+                        // muestra la informacion de la aplicacion.
+                        ifAInfo()
+                        true
+                    }
+                    // Caso por defecto del when.
+                    else -> false
+                }
+            }
+            // Muestra el menu en pantalla una vez configurado.
+            menuEmergente.show()
+        }
+```
+
