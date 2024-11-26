@@ -13,6 +13,37 @@ https://developer.android.com/training/data-storage/room?hl=es-419
 3. Crear un DAO - que viene a ser un interfaz para operaciones CRUD.
 
 
+# 📌 Dependencias.
+**Entradas en fichero libs.versions.toml**
+```toml
+[versions]
+kotlin = "2.0.0"
+ksp = "2.0.21-1.0.27"
+roomVersion = "2.6.1"
+
+[libraries]
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomVersion" }
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomVersion" }
+
+[plugins]
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+```
+**Entradas en build.gradle.kts** module app
+```
+plugins {
+    alias(libs.plugins.ksp)
+}
+
+dependencies {
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
+}
+```
+
+
 ## 📍 Crear la entidad - tabla.
 - crear una `dataclass` con los campos que tendrá la tabla.
 - anotar la clase con @Entity
@@ -159,7 +190,8 @@ Este paso lo que hace es indicar en el manifes, el nombre que clase deseamos ini
     ... >
 </application>
 ```
-![imagen](https://github.com/user-attachments/assets/694f3cfe-4b51-42d2-934a-68a6e5c56623)
+![imagen](https://github.com/user-attachments/assets/e34d412d-db2f-4c28-8bc4-94ebc3d1fc5e)
+
 
 3. Realizamos las llamadas.
 ```kotlin
@@ -195,21 +227,22 @@ fun loadAllPreguntasLive(): LiveData<List<Pregunta>>
 
 **Llamada y observacion de datos.**
 ```kotlin
-  // Este bloque de codigo "OBSERVA" una variable cuyo valor
-  // depende de una llamada a la base de gatos. Al actualizarse
-  // la base de datos se actualiza a su vez el codigo que depende de ella.
-  database.preguntaDao().loadAllPreguntasLive().observe(this)
-  {
-      listado ->
-      botonJugar.setOnClickListener {
-          if (listado.size > 7){
-              irAJugar()
-          }
-          else {
-              // Muestra el error de acceso a juego.
-              muestraError()
-              muestraMensaje("¡Necesitas preguntas!")
-          }
-      }
-  }
+// Este bloque de codigo "OBSERVA" una variable cuyo valor
+// depende de una llamada a la base de gatos. Al actualizarse
+// la base de datos se actualiza a su vez el codigo que depende de ella.
+database.preguntaDao().loadAllPreguntasLive().observe(this) { listado ->
+    // Save the listado value in a variable if needed.
+    this.listado = listado
+}
+
+botonJugar.setOnClickListener {
+    val currentListado = listado ?: emptyList() // Ensure listado is not null
+    if (currentListado.size > 7) {
+        irAJugar()
+    } else {
+        muestraError()
+        muestraMensaje("¡Necesitas preguntas!")
+    }
+}
+
 ```
