@@ -325,3 +325,26 @@ En los layout.xml es necesario envolver los `radio-button` en un `radio-group`.
         }
 ```
 
+# 📌 Funcion con retraso.
+Esta funcion espera 2 segundos antes de finalizar la ejecución.
+```kotlin
+private fun muestraMensaje(mensaje: String) {
+    findViewById<TextView>(R.id.tv_titulo2).isVisible=true
+    
+    Handler(Looper.getMainLooper()).postDelayed({
+        findViewById<TextView>(R.id.tv_titulo2).isVisible=false
+    }, 2000)
+}
+```
+
+# 📌 Objetos animación.
+```kotlin
+// Create the ObjectAnimator to rotate the ImageView 360 degrees
+val rotateAnimator = ObjectAnimator.ofFloat(findViewById<ImageView>(R.id.logo), "rotation",  10f, 0f, -10f)
+
+rotateAnimator.duration = 2000  // Duration of one full rotation (in milliseconds)
+rotateAnimator.repeatCount = ObjectAnimator.INFINITE  // Repeat infinitely
+rotateAnimator.repeatMode = ObjectAnimator.REVERSE  // Reverse the direction after each cycle
+
+rotateAnimator.start()  // Start the rotation animation
+```
