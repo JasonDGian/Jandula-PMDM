@@ -182,6 +182,7 @@ data class Pregunta(
 
 # 📌 Fragmentos.
 1. **Crear fragmento nuevo:** `New` > `Fragment` > `Fragment(Blank)` > Nombrar el fragmento `NombreFragment`
+    - Esto generará el fichero `activity` y el `layout` para el fragmento.
 2. **Borrar comentarios genéricos.**
 3. **Definir el layout y elementos del fragmento** (diseño).
 4. **Posicionar el fragmento en la actividad principal** (FragmentContainerView + ID fragmento).
@@ -355,3 +356,26 @@ rotateAnimator.repeatMode = ObjectAnimator.REVERSE  // Reverse the direction aft
 
 rotateAnimator.start()  // Start the rotation animation
 ```
+
+# 📌 Permisos de internet.
+Abre el archivo AndroidManifest.xml y dentro del elemento <manifest>, agrega el siguiente permiso:
+```xml
+<uses-permission android:name="android.permission.INTERNET" />
+```
+El permiso debe estar definido antes del elemento <application> en el archivo, como se muestra aquí:
+```xml
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.myapp">
+
+    <!-- Permiso para acceder a internet -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.MyApp">
+        <!-- Actividades y otros componentes -->
+    </application>
+</manifest>
+```
+
