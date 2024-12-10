@@ -38,4 +38,51 @@ class CustomView @JvmOverloads constructor(context: Context,
 
 
 
+# Reproductores video y audio.
+
+Para reproducir recursos de internet debemos explicitar la necesidad del permiso. 
+```xml
+<uses-permission android:name="android.permission.INTERNET" />
+```
+
+
+para reprodudicr ficheros almacenados en `res/raw`
+
+```kotlin
+var mediaPlayer = MediaPlayer.create(context, R.raw.sound_file_1)
+mediaPlayer.start() // no need to call prepare(); create() does that for you
+```
+
+Así es como puedes reproducir desde un URI disponible localmente en el sistema (la cual obtuviste mediante un agente de resolución de contenido, por ejemplo):
+```kotlin
+val myUri: Uri = .... // initialize Uri here
+val mediaPlayer = MediaPlayer().apply {
+    setAudioAttributes(
+        AudioAttributes.Builder()
+            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+            .setUsage(AudioAttributes.USAGE_MEDIA)
+            .build()
+    )
+    setDataSource(applicationContext, myUri)
+    prepare()
+    start()
+}
+```
+
+La reproducción desde una URL remota a través de la transmisión HTTP tiene el siguiente aspecto:
+```kotlin
+val url = "http://........" // your URL here
+val mediaPlayer = MediaPlayer().apply {
+    setAudioAttributes(
+        AudioAttributes.Builder()
+            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+            .setUsage(AudioAttributes.USAGE_MEDIA)
+            .build()
+    )
+    setDataSource(url)
+    prepare() // might take long! (for buffering, etc)
+    start()
+}
+``` 
+
 
