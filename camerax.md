@@ -29,3 +29,10 @@ androidx.camera.extensions = { module = "androidx.camera:camera-extensions", ver
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 ```
+
+**Por ultimo, habilitar el viewBinding, colocando esta instruccion despues del "defaultconfig"**
+```kts
+    buildFeatures {
+        viewBinding = true
+    }
+```
