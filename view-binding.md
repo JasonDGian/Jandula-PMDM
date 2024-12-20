@@ -31,7 +31,7 @@ Crea un fichero XML con el layout que deseas vincular, de no tenerlo ya.
 
 ## 4. Declara una variable de tipo 'Activity-NOMBRE-Binding'.
 Declaramos una variable cuyo tipo de clase dependerá directamente del nombre del fichero XML.    
-Si por ejemplo estamos creando un viewBinding para `main_activity.xml` entonces la declaración será así;    
+Si por ejemplo estamos creando un viewBinding para `activity_main.xml` entonces la declaración será así;    
 ```kotlin
     // Declara la variable de tipo viewBinding para acceder a la vista.
     private lateinit var viewBinding: ActivityMainBinding
