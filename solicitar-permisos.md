@@ -20,7 +20,7 @@ Antes de solicitar un permiso, comprueba si ya ha sido concedido:
 **Companion object.**   
 ```kotlin
 // Codigo para el permiso de la camara.
-private val REQUEST_CAMERA_PERMISSION = 100 // ID unico por app.
+private val SOLICITUD_PERMISOS_CAMARA = 100 // ID unico por app.
 ```
 **En tiempo de ejecución.**
 ```kotlin
@@ -33,7 +33,7 @@ if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
     ActivityCompat.requestPermissions(
         this,
         arrayOf(Manifest.permission.CAMERA),
-        REQUEST_CAMERA_PERMISSION
+        SOLICITUD_PERMISOS_CAMARA
     )
 }
 ```
