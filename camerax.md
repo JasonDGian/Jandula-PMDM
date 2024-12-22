@@ -124,3 +124,72 @@ implementation (libs.androidx.camera.extensions)
         android:name="android.hardware.camera"
         android:required="true" />
 ```
+
+**En el companion object**   
+```kotlin
+companion object {
+    // Constante que representa el código único utilizado para identificar la solicitud de permisos
+    private const val CODIGO_PERMISOS = 10
+
+    // Lista mutable que contiene los permisos requeridos para la funcionalidad de la aplicación
+    private val PERMISOS_REQUERIDOS = mutableListOf(
+        // Permiso para acceder a la cámara
+        Manifest.permission.CAMERA,
+        // Permiso para grabar audio
+        Manifest.permission.RECORD_AUDIO
+    ).apply {
+        // Verifica si la versión del SDK de Android es igual o menor a Android 9 (Pie)
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {
+            // Agrega el permiso para escribir en el almacenamiento externo en versiones antiguas
+            add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        }
+    }.toTypedArray() // Convierte la lista mutable a un arreglo para facilitar su uso
+}
+```
+   
+**Funcion que solicita los permisos si no han sido otorgados**   
+```kotlin
+// Verifica si todos los permisos necesarios están concedidos
+if (todosLosPermisosConcedidos()) {
+    // Si todos los permisos están otorgados, inicializa la cámara
+    iniciarCamara()
+} else {
+    // Si faltan permisos, solicita los permisos al usuario
+    ActivityCompat.requestPermissions(
+        this,                // Contexto de la actividad actual
+        PERMISOS_REQUERIDOS, // Lista de permisos requeridos
+        CODIGO_PERMISOS      // Código único para identificar esta solicitud
+    )
+}
+```
+   
+**Funcion de comprobación de permisos.**   
+```kotlin
+// Define una función privada que verifica si todos los permisos necesarios han sido otorgados.
+// Devuelve un valor booleano (true o false).
+private fun todosLosPermisosConcedidos() = PERMISOS_REQUERIDOS.all {
+    ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
+}
+```
+   
+**Funcion que maneja los resultados de los permisos.**   
+```kotlin
+// Maneja los resultados de las solicitudes de permisos en tiempo de ejecución
+override fun onRequestPermissionsResult(codigoDeSolicitud: Int, permisosSolicitados: Array<out String>, resultadosEntregados: IntArray) {
+    // Llama a la implementación de la superclase para manejar otros casos predeterminados
+    super.onRequestPermissionsResult(codigoDeSolicitud, permisosSolicitados, resultadosEntregados)
+
+    // Verifica si el código de solicitud coincide con el definido para los permisos
+    if (codigoDeSolicitud == CODIGO_PERMISOS) {
+        // Comprueba si hay resultados y si el primer permiso fue concedido
+        if (resultadosEntregados.isNotEmpty() && resultadosEntregados[0] == PackageManager.PERMISSION_GRANTED) {
+            // Muestra un mensaje indicando que el permiso fue concedido
+            Toast.makeText(this, "Permiso concedido.", Toast.LENGTH_SHORT).show()
+        } else {
+            // Muestra un mensaje indicando que el permiso fue denegado
+            Toast.makeText(this, "Permiso denegado.", Toast.LENGTH_SHORT).show()
+        }
+    }
+}
+```
+
