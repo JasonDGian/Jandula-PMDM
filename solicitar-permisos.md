@@ -8,14 +8,14 @@
 >[!CAUTION]
 > Desde Android 6.0 (API 23), los permisos sensibles se solicitan en tiempo de ejecución. Si tu aplicación tiene un minSdkVersion menor a 23, asegúrate de manejar los permisos de manera adecuada. Esto hace que la declaración en el manifest o la solicitud de permisos pueda variar y deba de adaptarse al SDK en uso incluyendo mecanismos de retro-compatibilidad.
 
-# 📌 1. Declarar los permisos en el android manifest.
+## 📌 1. Declarar los permisos en el android manifest.
 En el fichero `AndroidManifest.xml` añadimos la linea del permiso que deseamos solicitar, encima de la etiqueta de `<Application>`.
 ```xml
 <uses-permission android:name="android.permission.CAMERA"/>
 <uses-permission android:name="android.permission.RECORD_AUDIO" />
 ```
 
-# 📌 2. Definir el codigo y permisos en el companion object.
+## 📌 2. Definir el codigo y permisos en el companion object.
 **Companion object.**   
 ```kotlin
 companion object {
@@ -28,7 +28,7 @@ companion object {
 }
 ```
 
-# 📌 3. Comprobar el estado del permiso (otorgado, no otorgado).
+## 📌 3. Comprobar el estado del permiso (otorgado, no otorgado).
 Antes de solicitar un permiso, comprueba si ya ha sido concedido:   
 
 **Funcion para comprobar más de un permiso.**   
@@ -54,7 +54,7 @@ if (todosLosPermisosConcedidos()) {
 }
 ```
 
-# 📌 4. Manejar la respuesta del usuario.
+## 📌 4. Manejar la respuesta del usuario.
 ```kotlin
 // Manejo de resultados de permisos
 // Método de callback que se llama automáticamente por el sistema Android cuando el usuario responde a una solicitud de permiso (es decir, cuando concede o deniega el permiso).
