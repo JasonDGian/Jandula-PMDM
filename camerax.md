@@ -1,6 +1,15 @@
 # 📌 Pasos a seguir.
-1. Añadir dependencias.
-2. Configurar compatibilidad de compilador con Java 1.8
+1. Añadir librerias al fichero toml.
+2. Configurar fichero build.gradle.kts de la aplicacion.
+    - Añadir configuración viewBinding.
+    - Comprobar configuración del compilador java.
+    - Añadir dependencias.
+3. Crear el diseño en el layout.xml de la actividad.
+    - Introducir un PreviewView de cameraX.
+    - Introducir botones de control.
+4. Crear la Activity del layout anterior.
+5. Declarar permisos en Android Manifest.
+6. Solicitar permisos en activity.
 
 
 
@@ -23,7 +32,13 @@ androidx-camera-extensions = { module = "androidx.camera:camera-extensions", ver
 ```
 
 ## 🔸 Fichero `build.graded.kts` (aplicación)
-Añadiremos la configuración del compilador para Java 1.8 y las dependencias del modulo dependencies.   
+**En el modulo `Android{}` - justo despues del modulo `defaultConfig{}`**   
+```kts
+    buildFeatures {
+        viewBinding = true
+    }
+```
+    
 **En el modulo `Android{}` - justo despues del modulo `buildTypes{}`**
 ```kts
 compileOptions {
@@ -31,7 +46,7 @@ compileOptions {
     targetCompatibility = JavaVersion.VERSION_1_8
 }
 ```
-
+    
 **En el modulo `Dependencies{}`**
 ```kts
 implementation (libs.androidx.camera.core)
@@ -42,11 +57,70 @@ implementation (libs.androidx.camera.view)
 implementation (libs.androidx.camera.extensions)
 ```
 
+## 🔸 Pantalla de previsualización de la camara.
 
+**Diseño XML.**
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+   xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:app="http://schemas.android.com/apk/res-auto"
+   xmlns:tools="http://schemas.android.com/tools"
+   android:layout_width="match_parent"
+   android:layout_height="match_parent"
+   tools:context=".MainActivity">
 
-**Por ultimo, habilitar el viewBinding, colocando esta instruccion despues del "defaultconfig"**
-```kts
-    buildFeatures {
-        viewBinding = true
-    }
+   <androidx.camera.view.PreviewView
+       android:id="@+id/viewFinder"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent" />
+
+   <Button
+       android:id="@+id/image_capture_button"
+       android:layout_width="110dp"
+       android:layout_height="110dp"
+       android:layout_marginBottom="50dp"
+       android:layout_marginEnd="50dp"
+       android:elevation="2dp"
+       android:text="@string/take_photo"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintLeft_toLeftOf="parent"
+       app:layout_constraintEnd_toStartOf="@id/vertical_centerline" />
+
+   <Button
+       android:id="@+id/video_capture_button"
+       android:layout_width="110dp"
+       android:layout_height="110dp"
+       android:layout_marginBottom="50dp"
+       android:layout_marginStart="50dp"
+       android:elevation="2dp"
+       android:text="@string/start_capture"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintStart_toEndOf="@id/vertical_centerline" />
+
+   <androidx.constraintlayout.widget.Guideline
+       android:id="@+id/vertical_centerline"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:orientation="vertical"
+       app:layout_constraintGuide_percent=".50" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+```
+
+**Activity relacionada.**
+
+## 🔸 Declaración de permisos en `AndroidManifest.xml`.
+```xml
+    <uses-feature android:name="android.hardware.camera.any" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
 ```
