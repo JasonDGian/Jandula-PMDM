@@ -247,3 +247,60 @@ botonJugar.setOnClickListener {
 
 ```
 
+# 📌 Claves primarias compuestas.
+Para definir  una clave primaria compuesta deberemos de incluir su configuración como parametro en la anotación `@Entity`.
+
+**Ejemplo**:   
+```kotlin
+import androidx.room.Entity
+
+@Entity(primaryKeys = ["usuarioId", "eventoId"])
+data class Registro(
+    val usuarioId: Int, // Parte de la clave primaria
+    val eventoId: Int,  // Parte de la clave primaria
+    val fecha: String   // Otros campos
+)
+```
+
+# 📌 Relaciones entre entidades.
+
+## 📍 Relaciones 1:N
+Para implementar una relación `1:N` (uno-a-muchos) en `Room`, necesitas realizar los siguientes pasos:
+ 1. Definir las entidades principales y secundarias.
+ 2. Establecer la clave foránea (foreign key) en la entidad secundaria.
+ 3. Crear una clase de relación con @Relation.
+ 4. Definir las consultas en el DAO.
+
+
+
+Tabla usuario.
+```kotlin
+@Entity
+data class Usuario(
+    @PrimaryKey(autoGenerate = true)
+    val id: Int,
+    val nombre: String,
+    val email: String
+)
+```
+
+Tabla Tarea
+```kotlin
+@Entity(
+    foreignKeys = [
+        ForeignKey(
+            entity = Usuario::class,
+            parentColumns = ["id"],
+            childColumns = ["usuarioId"],
+            onDelete = ForeignKey.CASCADE // Opcional: Borra tareas si el usuario es eliminado
+        )
+    ]
+)
+data class Tarea(
+    @PrimaryKey(autoGenerate = true) val id: Int,
+    val descripcion: String,
+    val completada: Boolean,
+    val usuarioId: Int // Relaciona esta columna con la tabla Usuario
+)
+```
+
