@@ -18,10 +18,10 @@ En directorio `res/values/` , en el fichero `values.xml` introducimos lo siguien
 </resources>
 ```
 
-# 📌 2 - Creamos una nueva actividad 'MyCanvas' que defina el lienzo de dibujo y las propiedades del pincel.
-En esta actividad definimos distintas funciones y atributos.
+# 📌 2 - Creamos una vista personalizada que representa el lienzo.
    
 ```kotlin
+package es.iesjandula.paintapp
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -35,7 +35,6 @@ import android.view.ViewConfiguration
 import androidx.core.content.res.ResourcesCompat
 import kotlin.math.abs
 
-
 class MyCanvas(context: Context) : View(context) {
 
     /**
@@ -43,7 +42,7 @@ class MyCanvas(context: Context) : View(context) {
      */
 
     // Color de fondo del lienzo
-    private val colorFondo = ResourcesCompat.getColor(resources, R.color.red, null)
+    private val colorFondo = ResourcesCompat.getColor(resources, R.color.yellow, null)
 
     // Canvas (lienzo) donde se dibujarán las líneas
     private lateinit var lienzo: Canvas
@@ -131,14 +130,19 @@ class MyCanvas(context: Context) : View(context) {
 
     // Maneja los eventos táctiles (toques del usuario)
     override fun onTouchEvent(event: MotionEvent?): Boolean {
-        motionX = event!!.x
-        motionY = event!!.y
-        when (event.action) {
-            MotionEvent.ACTION_DOWN -> touchStart() // Inicio de un trazo
-            MotionEvent.ACTION_MOVE -> touchMove() // Movimiento del trazo
-            MotionEvent.ACTION_UP -> touchUp() // Finalización del trazo
+        // controla si el evento es nulo antes de operar.
+        if (event != null) {
+            motionX = event.x
+            motionY = event.y
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> touchStart() // Inicio de un trazo
+                MotionEvent.ACTION_MOVE -> touchMove() // Movimiento del trazo
+                MotionEvent.ACTION_UP -> touchUp() // Finalización del trazo
+            }
+            return true
         }
-        return true
+        // Retorna false si el evento es null
+        return false
     }
 
     // Resetea el camino actual cuando el trazo termina
@@ -176,9 +180,56 @@ class MyCanvas(context: Context) : View(context) {
 ```
 
 
-# 📌 3 - 
+# 📌 3 - Introducimos la vista en el XML que define el layout del main activity.
 
-# 📌 4 - 
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <es.iesjandula.paintapp.MyCanvas
+        android:id="@+id/lienzo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+```
+
+# 📌 4 - Configuramos el main activity para que utilice el layout en modo correcto.
+```kotlin
+package es.iesjandula.paintapp
+
+import android.os.Bundle
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        //setContentView(R.layout.activity_main)
+        //Nos creamos una variable de tipo canvas
+        val myCanvas = MyCanvas(this)
+
+        setContentView(myCanvas)
+
+    }
+}
+``
+
 
 # 📌 5 - 
 
