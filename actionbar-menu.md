@@ -90,15 +90,16 @@ Creamos un nuevo layout en el directorio de recursos de tipo `<androidx.appcompa
         android:icon="@drawable/baseline_arrow_back_24"
         app:showAsAction="never" />
 
-<!-- Entrada de menú para "Ayuda" -->
-<item
-    android:id="@+id/item2"
-    android:title="Menu Item 2"
-    android:icon="@drawable/baseline_arrow_back_24"
-    app:showAsAction="never" />
+    <!-- Entrada de menú para "Ayuda" -->
+    <item
+        android:id="@+id/item2"
+        android:title="Menu Item 2"
+        android:icon="@drawable/baseline_arrow_back_24"
+        app:showAsAction="never" />
 
 </menu>
 ```
+
 
 
 
