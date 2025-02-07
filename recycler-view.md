@@ -1,2 +1,0 @@
-# 📌 Recycler view.
-TODO
